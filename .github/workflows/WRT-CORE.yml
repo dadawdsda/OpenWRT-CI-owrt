@@ -225,14 +225,23 @@ jobs:
           tag_name: ${{env.WRT_CONFIG}}_${{env.WRT_VER}}_${{env.WRT_DATE}}
           files: ./wrt/upload/*.*
           body: |
-            这是个平台固件包，内含多个设备！
-            请注意选择你需要的设备固件！
-            不要问，刷就完事了！
+            支持设备：
+              京东云亚瑟/re-ss-01/AX1800-Pro
+              京东云雅典娜/re-cs-02/AX6600
+              京东云太乙/re-cs-07 (仅NOWIFI)
 
-            全系带开源硬件加速，别问了！
-
+            本包含有dae，若要使用factory包请使用支持12M内核的uboot。
+            
+            包含插件：
+              科学：homeproxy nikki/mihomo dae/daed openclash passwall
+              网络：tailscale wireguard upnp
+              系统：autoreboot diskman ttyd
+              实用：wolplus ddns-go mosdns smartdns usb-printer
+              NAS：samba4 aria2 alist
             内核版本：${{env.WRT_KVER}}
+            内核大小：12M
 
+            包管理器：opkg(ipk)
             WIFI名称：${{env.WRT_SSID}}
             WIFI密码：${{env.WRT_WORD}}
 
