@@ -54,7 +54,7 @@ UPDATE_PACKAGE() {
 # UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
 UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-24.10"
 
-UPDATE_PACKAGE "homeproxy" "VIKINGYFY/homeproxy" "main"
+UPDATE_PACKAGE "homeproxy" "dadawdsda/homeproxy" "master"
 UPDATE_PACKAGE "nikki" "nikkinikki-org/OpenWrt-nikki" "main"
 UPDATE_PACKAGE "openclash" "vernesong/OpenClash" "dev" "pkg"
 UPDATE_PACKAGE "passwall" "xiaorouji/openwrt-passwall" "main" "pkg"
@@ -108,5 +108,11 @@ UPDATE_VERSION() {
 }
 
 #UPDATE_VERSION "软件包名" "测试版，true，可选，默认为否"
-UPDATE_VERSION "sing-box"
 UPDATE_VERSION "tailscale"
+
+#指定sing-box为1.10.7
+SING_BOX_PKG_FILES=$(find ./ ../feeds/packages/ -maxdepth 3 -type f -wholename "*/sing-box/Makefile")
+SING_BOX_HASH=$(curl -sL "https://codeload.github.com/SagerNet/sing-box/tar.gz/1.10.7" | sha256sum | cut -b -64)
+sed -i "s/PKG_VERSION:=.*/PKG_VERSION:=1.10.7/g" "$SING_BOX_PKG_FILES"
+sed -i "s/PKG_HASH:=.*/PKG_HASH:=$SING_BOX_HASH/g" "$SING_BOX_PKG_FILES"
+echo "sing-box 1.10.7"
