@@ -62,3 +62,9 @@ if [[ $WRT_TARGET != *"X86"* ]]; then
 	echo "CONFIG_TARGET_OPTIONS=y" >> ./.config
 	echo "CONFIG_TARGET_OPTIMIZATION=\"-O2 -pipe -march=armv8-a+crypto+crc -mcpu=cortex-a53+crypto+crc -mtune=cortex-a53\"" >> ./.config
 fi
+
+#12M内核
+if [[ $WRT_TARGET == *"QUALCOMMAX"* ]]; then
+	sed -i 's/KERNEL_SIZE := 6144k/KERNEL_SIZE := 12288k/' ./target/linux/qualcommax/image/ipq60xx.mk
+
+fi

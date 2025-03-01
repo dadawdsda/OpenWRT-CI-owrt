@@ -84,7 +84,7 @@ jobs:
       - name: Initialization Values
         run: |
           export WRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
-          export WRT_MARK=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1)
+          export WRT_MARK="Dr.Clef"
           export WRT_VER=$(echo $WRT_REPO | cut -d '/' -f 5-)-$WRT_BRANCH
           export WRT_TARGET=$(grep -m 1 -oP '^CONFIG_TARGET_\K[\w]+(?=\=y)' ./Config/$WRT_CONFIG.txt | tr '[:lower:]' '[:upper:]')
 
@@ -155,7 +155,7 @@ jobs:
       - name: Custom Packages
         run: |
           cd ./wrt/package/
-
+          $GITHUB_WORKSPACE/Scripts/InstallDAE.sh
           $GITHUB_WORKSPACE/Scripts/Packages.sh
           $GITHUB_WORKSPACE/Scripts/Handles.sh
 
